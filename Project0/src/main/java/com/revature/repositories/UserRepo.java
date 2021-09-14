@@ -1,6 +1,7 @@
 package com.revature.repositories;
 
 import com.revature.models.User;
+import com.revature.models.leagueinfo;
 import com.revature.utils.ConnectionUtil;
 
 import java.sql.Connection;
@@ -26,7 +27,74 @@ public class UserRepo implements CrudRepository<User> {
 
             if (rs.next()) {
                 User u = new User(
-                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("username"),
+                        rs.getString("password")
+
+
+
+
+                );
+
+                return u;
+
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public User getisadmin(String username) {
+        try (Connection conn = cu.getConnection()) {
+            String sql = "select * from users where username = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                User u = new User(
+                        rs.getInt("user_id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getBoolean("isadmin")
+
+
+                );
+
+                return u;
+
+
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
+
+
+
+    public User getUsername(String username) {
+
+        try (Connection conn = cu.getConnection()) {
+            String sql = "select * from users where username = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                User u = new User(
+                        rs.getInt("user_id"),
                         rs.getString("username"),
                         rs.getString("password")
 
@@ -43,6 +111,52 @@ public class UserRepo implements CrudRepository<User> {
         return null;
 
     }
+
+    public User averageuserRegister(String username, String password) {
+
+        try (Connection conn = cu.getConnection()) {
+            String sql = "insert into users values(default,?,?,false)";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            int rs = ps.executeUpdate();
+
+
+                return null;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public User adminRegister(String username, String password) {
+
+        try (Connection conn = cu.getConnection()) {
+            String sql = "insert into users values(default,?,?,true)";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+
+            int rs = ps.executeUpdate();
+
+
+            return null;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+
 
 
 

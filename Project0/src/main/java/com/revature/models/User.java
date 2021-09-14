@@ -3,30 +3,42 @@ package com.revature.models;
 public class User {
 
     //Instance Variables
-    private Integer id;
+    private Integer user_id;
     private String username;
     private String password;
-    private Boolean Admin;
+    private Boolean isadmin;
 
 
-    public User(int id, String username, String password, boolean user_type) {
+    public User() {
+
 
     }
 
-    public User(int id, String username, String password, String user_type){
+    public User(String username, String password){
 
-    }
-
-
-
-
-    public User(String username, String password) {
         this.username = username;
         this.password = password;
+        this.isadmin = isadmin;
+    };
+
+
+    public User(Integer user_id, String username, String password, Boolean isadmin) {
+            this.user_id =user_id;
+            this.username =username;
+            this.password = password;
+            this.isadmin =isadmin;
+
     }
 
+    public User(Boolean isadmin) {
+        this.isadmin = isadmin;
+    }
+
+
+
+
     public User(Integer id, String username, String password) {
-        this.id = id;
+        this.user_id = id;
         this.username = username;
         this.password = password;
     }
@@ -34,23 +46,23 @@ public class User {
 
 
     public Integer getId() {
-        return id;
+        return user_id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.user_id = user_id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public Boolean getAdmin() {return Admin;}
+    public Boolean getAdmin() {return isadmin;}
 
-    public void setAdmin(Boolean Admin) {this.Admin =Admin;}
+    public void setAdmin(Boolean Admin) {this.isadmin =isadmin;}
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String username, String password) {
+        this.username = username;  this.password=password;
     }
 
     public String getPassword() {
@@ -61,10 +73,15 @@ public class User {
         this.password = password;
     }
 
+
+    public boolean isadmin(){
+        return isadmin;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + user_id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';

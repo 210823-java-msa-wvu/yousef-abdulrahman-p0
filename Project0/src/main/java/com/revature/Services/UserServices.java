@@ -1,20 +1,21 @@
 package com.revature.Services;
 
 
+import com.revature.Exceptions.UserdoesnotExistException;
 import com.revature.models.User;
 import com.revature.repositories.UserRepo;
-
-import java.sql.SQLException;
 
 public class UserServices {
 
     UserRepo userRepo = new UserRepo();
 
-    public boolean login(String username, String password) {
+    public boolean login(String username, String password) throws UserdoesnotExistException {
 
 
         User u = userRepo.getByUsername(username);
-
+        if(u==null){
+            throw new UserdoesnotExistException();
+        }
         if (u != null) {
 
             if (username.equals(u.getUsername()) && password.equals(u.getPassword())) {
@@ -27,6 +28,52 @@ public class UserServices {
 
         return false;
     }
+
+
+    //average userRegister
+
+    public User averageuserRegister(String username, String password){
+        User u =userRepo.averageuserRegister(username,password);
+        //User u = userRepo.getByUsername(username);
+        if(u!=null) {
+                throw new IllegalArgumentException();
+        }
+
+        return u;
+
+
+
+    }
+
+
+    public User adminRegister(String username, String password){
+        User u =userRepo.adminRegister(username,password);
+        if(u!=null) {
+            throw new IllegalArgumentException();
+        }
+
+        return u;
+
+
+
+    }
+
+
+
+    public boolean isadmin(String accountname) {
+
+        User u = new User();
+
+        u = userRepo.getisadmin(accountname);
+
+
+        return u.getAdmin();
+
+
+    }
+
+
+
 
 
 
