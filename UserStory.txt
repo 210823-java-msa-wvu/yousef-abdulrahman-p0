@@ -1,0 +1,17 @@
+
+League of legends video game interaction with other players in ranked application
+two users: 1. Average User 2. Video Game Employee 
+
+Both users Can: 
+Log in to an existing account
+
+Average User Can do : 
+1. Register for a user account
+2. Add your league account (required name of the account)
+3.  Get data of their stats of the game such as rank, level, time played on the account, winrate, and border (instead of this update information)
+4. Request a duel with another player 
+
+
+Employee can do everything average use can as well as :
+1. Approve a duel request(has to be 1 rank above or below your rank, nothing more than)
+
